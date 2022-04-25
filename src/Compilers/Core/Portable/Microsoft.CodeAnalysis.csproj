@@ -25,10 +25,10 @@
   </ItemGroup>
   <ItemGroup>
     <!--
-      Analyzers that will be used to analyze projects that references 
+      Analyzers that will be used to analyze projects that references
       Microsoft.CodeAnalysis project or Microsoft.CodeAnalysis.Common package.
-      
-      Note: PrivateAssets="ContentFiles" ensures that projects referencing Microsoft.CodeAnalysis.Common package 
+
+      Note: PrivateAssets="ContentFiles" ensures that projects referencing Microsoft.CodeAnalysis.Common package
       will import everything but content files from Microsoft.CodeAnalysis.Analyzers, specifically, analyzers.
     -->
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="$(MicrosoftCodeAnalysisAnalyzersVersion)" Condition="'$(DotNetBuildFromSource)' != 'true'" PrivateAssets="ContentFiles" />
@@ -47,10 +47,16 @@
   <PropertyGroup>
     <LapisPublicKey>002400000480000094000000060200000024000052534131000400000100010045207314d3449e4fa90845b9783e6603eea85dca7eeb3ff2e6ae9cbd8262a55f080ea00cd49864e9297f49442a7d6571be7e2612e64f7ebd00eafeb711e4cbfb39703fb82a990a5432740dc4c19a09ca1b51a9e0e816e3cd1cafe1ab0a3a7e2b7610590e0b2bc5c0a82dcc31f5ad05a262d755ff8eb16f13e362f69548e7379f</LapisPublicKey>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <InternalsVisibleTo Include="Lapis.Compiler" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler.Syntax" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler.Syntax.Tests" Key="$(LapisPublicKey)" />
     <InternalsVisibleTo Include="Lapis.Compiler.Emit" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler.Emit.Tests" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler.Compilation" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler.Compilation.Tests" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler.Emit.Tests" Key="$(LapisPublicKey)" />
+    <InternalsVisibleTo Include="Lapis.Compiler" Key="$(LapisPublicKey)" />
     <InternalsVisibleTo Include="Lapis.Compiler.Tests" Key="$(LapisPublicKey)" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic" />
