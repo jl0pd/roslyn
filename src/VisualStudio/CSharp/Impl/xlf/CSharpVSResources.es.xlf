@@ -57,6 +57,11 @@
         <target state="translated">Reglas de formato de C#</target>
         <note />
       </trans-unit>
+      <trans-unit id="Collapse_usings_on_file_open">
+        <source>Collapse usings on file open</source>
+        <target state="translated">Contraer instrucciones Using al abrir el archivo</target>
+        <note />
+      </trans-unit>
       <trans-unit id="Completion">
         <source>Completion</source>
         <target state="translated">Finalización</target>

@@ -8,11 +8,26 @@ trigger:
 
 # Branches that trigger builds on PR
 pr:
-- main
-- main-vs-deps
-- release/*
-- features/*
-- demos/*
+  branches:
+    include:
+    - main
+    - main-vs-deps
+    - release/*
+    - features/*
+    - demos/*
+  paths:
+    exclude:
+      - docs/*
+      - eng/config/OptProf.json
+      - eng/config/PublishData.json
+      - .vscode/*
+      - .github/*
+      - .devcontainer/
+      - .git-blame-ignore-revs
+      - .vsconfig
+      - CODE-OF-CONDUCT.md
+      - CONTRIBUTING.md
+      - README.md
 
 jobs:
 - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
@@ -20,7 +35,7 @@ jobs:
     pool:
       name: $(poolName)
       demands: ImageOverride -equals $(queueName)
-    timeoutInMinutes: 135
+    timeoutInMinutes: 150
     variables:
       - name: XUNIT_LOGS
         value: $(Build.SourcesDirectory)\artifacts\log\Debug
@@ -35,7 +50,7 @@ jobs:
   pool:
     name: $(poolName)
     demands: ImageOverride -equals $(queueName)
-  timeoutInMinutes: 135
+  timeoutInMinutes: 150
   variables:
     - name: XUNIT_LOGS
       value: $(Build.SourcesDirectory)\artifacts\log\Debug
@@ -50,7 +65,7 @@ jobs:
   pool:
     name: $(poolName)
     demands: ImageOverride -equals $(queueName)
-  timeoutInMinutes: 135
+  timeoutInMinutes: 150
   variables:
     - name: XUNIT_LOGS
       value: $(Build.SourcesDirectory)\artifacts\log\Release
@@ -66,7 +81,7 @@ jobs:
     pool:
       name: $(poolName)
       demands: ImageOverride -equals $(queueName)
-    timeoutInMinutes: 135
+    timeoutInMinutes: 150
     variables:
       - name: XUNIT_LOGS
         value: $(Build.SourcesDirectory)\artifacts\log\Release

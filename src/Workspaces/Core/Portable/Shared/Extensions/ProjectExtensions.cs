@@ -5,6 +5,8 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Shared.Extensions
@@ -43,10 +45,27 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return document;
         }
 
+        public static TextDocument GetRequiredAdditionalDocument(this Project project, DocumentId documentId)
+            => project.GetAdditionalDocument(documentId) ?? throw new InvalidOperationException(WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document);
+
+        public static TextDocument GetRequiredAnalyzerConfigDocument(this Project project, DocumentId documentId)
+            => project.GetAnalyzerConfigDocument(documentId) ?? throw new InvalidOperationException(WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document);
+
         public static TextDocument GetRequiredTextDocument(this Project project, DocumentId documentId)
         {
             var document = project.GetTextDocument(documentId);
             if (document == null)
+            {
+                throw new InvalidOperationException(WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document);
+            }
+
+            return document;
+        }
+
+        public static async ValueTask<Document> GetRequiredSourceGeneratedDocumentAsync(this Project project, DocumentId documentId, CancellationToken cancellationToken)
+        {
+            var document = await project.GetSourceGeneratedDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+            if (document is null)
             {
                 throw new InvalidOperationException(WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document);
             }

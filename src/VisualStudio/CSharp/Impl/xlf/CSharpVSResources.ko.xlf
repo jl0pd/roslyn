@@ -57,6 +57,11 @@
         <target state="translated">C# 서식 설정 규칙</target>
         <note />
       </trans-unit>
+      <trans-unit id="Collapse_usings_on_file_open">
+        <source>Collapse usings on file open</source>
+        <target state="translated">파일을 열 때 사용 축소</target>
+        <note />
+      </trans-unit>
       <trans-unit id="Completion">
         <source>Completion</source>
         <target state="translated">완성</target>
